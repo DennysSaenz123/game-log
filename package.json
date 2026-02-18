@@ -1,0 +1,24 @@
+{
+  "name": "game-log",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennysSaenz123/game-log.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DennysSaenz123/game-log/issues"
+  },
+  "homepage": "https://github.com/DennysSaenz123/game-log#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
