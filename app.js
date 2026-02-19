@@ -4,6 +4,9 @@ import express from 'express';
 // create app instance
 const app = express();
 
+// ejs view engine setup
+app.set('view engine', 'ejs');
+
 // default route port
 const PORT = 3003;
 
@@ -11,7 +14,7 @@ const PORT = 3003;
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/home.html`);
+    res.render('home');
 });
 
 
