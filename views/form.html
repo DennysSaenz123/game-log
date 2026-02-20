@@ -16,6 +16,7 @@
         <div>
             <label for="title">Game Title</label>
             <input type="text" id="title" name="title" placeholder="Enter game title">
+            <span class="err" id="err-title">Please add title</span>
         </div>
 
         <!--Status-->
@@ -36,6 +37,7 @@
                 <input type="radio" name="status" value="completed">
                 Completed
             </label>
+            <span class="err" id="err-status">Please select status</span>
         </div>
 
         <!-- Rating -->
@@ -54,6 +56,7 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
+            <span class="err" id="err-rating">Please select rating</span>
         </div>
 
         <!-- Genres  -->
