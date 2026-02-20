@@ -7,6 +7,90 @@
     <title>Add-game</title>
 </head>
 <body>
+    <section class="add-game">
+    <h2>Add a Game</h2>
+
+    <form id="addGameForm">
+
+        <!--Title-->
+        <div>
+            <label for="title">Game Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter game title">
+        </div>
+
+        <!--Status-->
+        <div>
+            <p>Status</p>
+
+            <label>
+                <input type="radio" name="status" value="playing">
+                Currently Playing
+            </label>
+
+            <label>
+                <input type="radio" name="status" value="want">
+                Want to Play
+            </label>
+
+            <label>
+                <input type="radio" name="status" value="completed">
+                Completed
+            </label>
+        </div>
+
+        <!-- Rating -->
+        <div>
+            <label for="rating">Rating (1–10)</label>
+            <select id="rating" name="rating">
+                <option value="">Select rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+
+        <!-- Genres  -->
+        <div>
+            <p>Genres</p>
+
+            <label>
+                <input type="checkbox" name="genres" value="action">
+                Action
+            </label>
+
+            <label>
+                <input type="checkbox" name="genres" value="rpg">
+                RPG
+            </label>
+
+            <label>
+                <input type="checkbox" name="genres" value="adventure">
+                Adventure
+            </label>
+
+            <label>
+                <input type="checkbox" name="genres" value="sports">
+                Sports
+            </label>
+
+            <label>
+                <input type="checkbox" name="genres" value="strategy">
+                Strategy
+            </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Add Game</button>
+
+    </form>
+</section>
     
 </body>
 </html>
