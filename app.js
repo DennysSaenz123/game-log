@@ -8,7 +8,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // default route port
-const PORT = 3003;
+const PORT = 3007;
 
 //enable static file serving
 app.use(express.static('public'));

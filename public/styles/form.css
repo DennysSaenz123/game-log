@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;  
+  color: #0f172a;
+  padding: 30px 15px;
+}
+
+/* card */
+.add-game {
+  max-width: 650px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.add-game h2 {
+  color: #2563eb;       
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+/* form layout */
+#addGameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#addGameForm > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label, p {
+  font-weight: bold;
+}
+
+/* inputs */
+input[type="text"],
+select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* radio + checkbox labels */
+#addGameForm label {
+  font-weight: normal;
+}
+
+/* button */
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+/* error */
+.err {
+  color: darkred;
+  font-size: 0.9rem;
+  display: none; 
+}
