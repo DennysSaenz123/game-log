@@ -13,25 +13,27 @@ const PORT = 3007;
 //enable static file serving
 app.use(express.static('public'));
 
+//Add middlwware that allow express to read from data and store it in req.body
+app.use(express.urlencoded({ extended: true}));
+
+//Create temp array 
+
+const games =[];
 
 // define routes
 app.get('/', (req, res) => {
     res.render('home');
 });
-// route for games page
 app.get('/my-games', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/games.html`);
+    res.render('games');
 });
 
-// route for wishlist page
-app.get('/wishlist', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/wish-list.html`);
-});
-
-// route for form page
 app.get('/add-game', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/form.html`);
+    res.render('form');
 });
+
+//Submit game details
+
 
 // start listening to server
 app.listen(PORT, () => {
