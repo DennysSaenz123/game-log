@@ -26,11 +26,29 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 app.get('/my-games', (req, res) => {
-    res.render('games');
+    res.render('games', {games });
 });
 
-app.get('/add-game', (req, res) => {
-    res.render('form');
+app.get('/data-summary', (req, res) => {
+    res.render('data-summary', { games: games });
+});
+
+// handles form submissions
+app.post('/add-game', (req, res) => {
+    
+    const newGame = {
+        title: req.body.title,
+        status: req.body.status,
+        rating: req.body.rating,
+        genres: req.body.genres,
+        timestamp: new Date().toLocaleString()
+    };
+    
+    games.push(newGame);
+
+    res.redirect('/data-summary');
+
+   // res.render('form');
 });
 
 // route for wish-list
