@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true}));
 
 const games =[];
 
+
 // define routes
 app.get('/', (req, res) => {
     res.render('home');
