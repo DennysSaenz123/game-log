@@ -29,8 +29,8 @@ app.get('/my-games', (req, res) => {
     res.render('games', {games });
 });
 
-app.get('/data-summary', (req, res) => {
-    res.render('data-summary', { games: games });
+app.get('/confirmation', (req, res) => {
+    res.render('submit', { games: games });
 });
 
 // handles form submissions
@@ -46,14 +46,14 @@ app.post('/add-game', (req, res) => {
     
     games.push(newGame);
 
-    res.redirect('/data-summary');
+    res.redirect('/confirmation');
 
    // res.render('form');
 });
 
 // route for wish-list
-app.get('/wish-list', (req, res) => {
-    res.render('wish-list');
+app.get('/confirmation', (req, res) => {
+    res.render('submit');
 });
 
 // route for confirmation page/submit page
