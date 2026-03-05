@@ -33,6 +33,16 @@ app.get('/add-game', (req, res) => {
     res.render('form');
 });
 
+// route for wish-list
+app.get('/wish-list', (req, res) => {
+    res.render('wish-list');
+});
+
+// route for confirmation page/submit page
+app.post('/add-game', (req, res) => {
+    res.render('submit');
+});
+
 //Submit game details
 
 
