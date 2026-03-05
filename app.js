@@ -57,8 +57,8 @@ app.get('/wish-list', (req, res) => {
 });
 
 // route for confirmation page/submit page
-app.post('/add-game', (req, res) => {
-    res.render('submit');
+app.get('/add-game', (req, res) => {
+    res.render('form');
 });
 
 //Submit game details
