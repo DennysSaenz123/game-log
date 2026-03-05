@@ -1,70 +1,53 @@
-// import express
 import express from 'express';
 
-// create app instance
 const app = express();
-
-// ejs view engine setup
-app.set('view engine', 'ejs');
-
-// default route port
 const PORT = 3003;
 
-//enable static file serving
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-//Add middlwware that allow express to read from data and store it in req.body
-app.use(express.urlencoded({ extended: true}));
+const games = [];
 
-//Create temp array 
-
-const games =[];
-
-
-// define routes
+// Home
 app.get('/', (req, res) => {
-    res.render('home');
-});
-app.get('/my-games', (req, res) => {
-    res.render('games', {games });
+  res.render('home');
 });
 
-app.get('/confirmation', (req, res) => {
-    res.render('submit', { games: games });
-});
-
-// handles form submissions
-app.post('/add-game', (req, res) => {
-    
-    const newGame = {
-        title: req.body.title,
-        status: req.body.status,
-        rating: req.body.rating,
-        genres: req.body.genres,
-        timestamp: new Date().toLocaleString()
-    };
-    
-    games.push(newGame);
-
-    res.redirect('/confirmation');
-
-   // res.render('form');
-});
-
-// route for wish-list
-app.get('/confirmation', (req, res) => {
-    res.render('submit');
-});
-
-// route for confirmation page/submit page
+// Show form
 app.get('/add-game', (req, res) => {
-    res.render('form');
+  res.render('form');
 });
 
-//Submit game details
+// Handle form submit
+app.post('/add-game', (req, res) => {
+  const newGame = {
+    title: req.body.title,
+    status: req.body.status,
+    rating: req.body.rating,
+    genres: req.body.genres,
+    timestamp: new Date().toLocaleString()
+  };
 
+  games.push(newGame);
+  res.redirect('/confirmation');
+});
 
-// start listening to server
+// Confirmation page (submit.ejs)
+app.get('/confirmation', (req, res) => {
+  res.render('submit', { games });
+});
+
+// Games list page
+app.get('/my-games', (req, res) => {
+  res.render('games', { games });
+});
+
+// Wish list page
+app.get('/wish-list', (req, res) => {
+  res.render('wish-list');
+});
+
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

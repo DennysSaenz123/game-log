@@ -26,3 +26,9 @@ nav {
     text-decoration: none;
     transition: color 0.3s ease;
 }
+:root{
+    --primary-color: #1e588a;
+    --accent-color: #2563eb;
+    --secondary-color: #000000;
+    --background-color: #f0f4ff;
+}
