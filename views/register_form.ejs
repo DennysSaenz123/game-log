@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Register - Game Log</title>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="/styles/form.css"> 
+    <link rel="stylesheet" href="/styles/nav-bar.css">
+
+</head>
+<body>
+    <%- include('header') %>
+    <section class="add-game">
+    <h2>Register & Sign Up For Game Log!</h2>
+
+    <form id="addGameForm" action="/add-game" method="post">
+        <!--Personal Information-->
+        <!-- First & Last Name -->
+        <div>
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+            <span class="err" id="err-firstName">Please add first name</span>
+        </div>
+        <div>
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+            <span class="err" id="err-lastName">Please add last name</span>
+        </div>
+
+                <!--Email-->
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter email">
+            <span class="err" id="err-email">Please add email</span>
+        </div>
+        <!--Username-->
+        <div>
+            <label for="title">Username</label>
+            <input type="text" id="title" name="title" placeholder="Enter username">
+            <span class="err" id="err-title">Please add username</span>
+        </div>
+        <!--Username-->
+        <div>
+            <label for="title">Username</label>
+            <input type="text" id="title" name="title" placeholder="Enter username">
+            <span class="err" id="err-title">Please add username</span>
+        </div>
+        <!--Password-->
+        <div>
+            <label for="title">Password</label>
+            <input type="text" id="title" name="title" placeholder="Enter password">
+            <span class="err" id="err-title">Please add password</span>
+            </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Register</button>
+
+    </form>
+</section>
+    <script src="/js/script.js"></script> 
+</body>
+</html>
