@@ -15,27 +15,21 @@
     <section class="add-game">
     <h2>Sign In!</h2>
 
-    <form id="addGameForm" action="/add-game" method="post">
+    <form id="signInForm" action="/sign-in" method="post">
         <!--Username-->
         <div>
-            <label for="title">Username</label>
-            <input type="text" id="title" name="title" placeholder="Enter username">
-            <span class="err" id="err-title">Please add username</span>
-        </div>
-        <!--Username-->
-        <div>
-            <label for="title">Username</label>
-            <input type="text" id="title" name="title" placeholder="Enter username">
-            <span class="err" id="err-title">Please add username</span>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username">
+            <span class="err" id="err-username">Please add username</span>
         </div>
         <!--Password-->
         <div>
-            <label for="title">Password</label>
-            <input type="text" id="title" name="title" placeholder="Enter password">
-            <span class="err" id="err-title">Please add password</span>
-
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password">
+            <span class="err" id="err-password">Please add password</span>
+        </div>
         <!-- Submit Button -->
-        <button type="submit">Register</button>
+        <button type="submit">Sign In</button>
 
     </form>
 </section>
