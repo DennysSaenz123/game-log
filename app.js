@@ -48,6 +48,11 @@ app.get('/wish-list', (req, res) => {
   res.render('wish-list');
 });
 
+// Register page
+app.get('/register', (req,res) => {
+  res.render('register_form');
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
