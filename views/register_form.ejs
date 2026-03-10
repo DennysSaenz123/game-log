@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Register - Game Log</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
     <!-- Main Styles -->
     <link rel="stylesheet" href="/styles/form.css"> 
     <link rel="stylesheet" href="/styles/nav-bar.css">
+
+    <!-- Script -->
+<script src="/js/register_val.js" defer></script>
 
 </head>
 <body>
     <%- include('header') %>
     <section class="form">
     <h2>Register</h2>
-    <form id="registerForm" action="/register" method="post">
+    <form id="registerForm" action="/" method="get">
         <!--Personal Information-->
         <div>
             <label for="firstName">First Name</label>
@@ -53,6 +55,5 @@
 
     </form>
 </section>
-    <script src="/js/script.js"></script> 
 </body>
 </html>
