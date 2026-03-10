@@ -1,5 +1,14 @@
 import express from 'express';
 
+import dotenv from 'dotenv';
+
+import mysql2 from 'mysql2';
+
+//dotenv config
+dotenv.config();
+
+
+
 const app = express();
 const PORT = 3003;
 
@@ -48,11 +57,9 @@ app.get('/wish-list', (req, res) => {
   res.render('wish-list');
 });
 
-// Register page
-app.get('/register', (req,res) => {
+app.get('/register', (req, res) => {
   res.render('register_form');
 });
-
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
