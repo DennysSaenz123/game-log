@@ -11,7 +11,7 @@ body {
 }
 
 /* card */
-.add-game {
+.form {
   max-width: 650px;
   margin: 0 auto;
   background: #fff;
@@ -20,23 +20,22 @@ body {
   box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
-.add-game h2 {
+.form h2 {
   color: #2563eb;       
   margin-bottom: 18px;
   text-align: center;
 }
 
-/* form layout */
-#addGameForm {
+
+#addGameForm, #registerForm > div {
   display: flex;
   flex-direction: column;
+  margin: 10px;
   gap: 16px;
 }
-
-#addGameForm > div {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* radio + checkbox labels */
+#addGameForm, #registerForm label {
+  font-weight: normal;
 }
 
 label, p {
@@ -44,18 +43,29 @@ label, p {
 }
 
 /* inputs */
-input[type="text"],
 select {
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 1rem;
 }
-
-/* radio + checkbox labels */
-#addGameForm label {
-  font-weight: normal;
+input[type="text"] {
+  padding: 10px;
+  border-radius: .75rem;
+  
 }
+input[type="checkbox"]{
+  display: inline-block;
+  cursor: pointer;
+}
+.genre-item {
+  display: flex;
+  align-items: center;
+  margin: .45rem 0 .5rem 0;
+  gap: 16px;
+  cursor: pointer;
+}
+
 
 /* button */
 button {
