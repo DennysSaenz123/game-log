@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const games = [];
 
+
 // Database Connection Test Route
 app.get('/db-test', async (req, res) => {
   try {
@@ -48,11 +49,13 @@ app.get('/add-game', (req, res) => {
 
 // Handle form submit
 app.post('/add-game', (req, res) => {
+
+  const gameForm = req.body;
   const newGame = {
-    title: req.body.title,
-    status: req.body.status,
-    rating: req.body.rating,
-    genres: req.body.genres,
+    title: gameForm.title,
+    status: gameForm.status,
+    rating: gameForm.rating,
+    genres: gameForm.genres,
     timestamp: new Date().toLocaleString()
   };
 
@@ -75,9 +78,38 @@ app.get('/wish-list', (req, res) => {
   res.render('wish-list');
 });
 
+// Registration page
 app.get('/register', (req, res) => {
+
   res.render('register_form');
+
 });
+
+// Registration form handling
+app.post('/register', async (req, res) => {
+    const prof = req.body;
+  try {
+    const sql = 'INSERT INTO users (first_name,last_name,username, email, password) VALUES (?,?,?,?,?)'
+
+    const params = [
+      prof.firstName,
+      prof.lastName,
+      prof.username,
+      prof.email,
+      prof.password
+    ];
+    const result = await pool.execute(sql, params);
+    console.log('User registered:', result);
+  res.redirect('/confirmation');
+    }
+    catch (err){
+      console.error('Error registering user:', err);
+      res.status(500).send('Error registering user');
+    }
+
+  });
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
