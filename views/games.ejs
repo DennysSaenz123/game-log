@@ -16,5 +16,32 @@
 <body>
     <%- include('header') %>
     
+    <% if (games && games.length) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Rating</th>
+            <th>Genres</th>
+            <th>Wishlist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% games.forEach(function(game) { %>
+            <tr>
+              <td><%= game.title ?? '' %></td>
+              <td><%= game.status ?? '' %></td>
+              <td><%= game.rating === null ? '' : game.rating %></td>
+              <td><%= game.genres ?? '' %></td>
+              <td><%= game.wishlist ? 'Yes' : 'No' %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No games found.</p>
+    <% } %>
+  </main>
 </body>
 </html>
