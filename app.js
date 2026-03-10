@@ -7,6 +7,9 @@ import mysql2 from 'mysql2';
 //dotenv config
 dotenv.config();
 
+// temporary user id for testing
+const CURRENT_USER_ID = 1;
+
 
 // POOL
 const pool = mysql2.createPool({
@@ -20,11 +23,12 @@ const pool = mysql2.createPool({
 const app = express();
 const PORT = 3003;
 
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-const games = [];
+const games = []; //in-memory array
 
 
 // Database Connection Test Route
@@ -40,6 +44,7 @@ app.get('/db-test', async (req, res) => {
 // Home
 app.get('/', (req, res) => {
   res.render('home');
+
 });
 
 // Show form
@@ -48,29 +53,43 @@ app.get('/add-game', (req, res) => {
 });
 
 // Handle form submit
-app.post('/add-game', (req, res) => {
+app.post('/add-game', async (req, res) => {
 
   const gameForm = req.body;
-  const newGame = {
-    title: gameForm.title,
-    status: gameForm.status,
-    rating: gameForm.rating,
-    genres: gameForm.genres,
-    timestamp: new Date().toLocaleString()
-  };
 
-  games.push(newGame);
-  res.redirect('/confirmation');
+  try {
+    const sql = 'INSERT INTO user_games (user_id, title, status, rating, genres, wishlist) VALUES (?,?,?,?,?,?)';
+
+    const params = [
+      CURRENT_USER_ID,
+      gameForm.title ?? null,
+      gameForm.status ?? null,
+      gameForm.rating ? Number(gameForm.rating) : null,
+      gameForm.genres ?? null,
+      1,
+    ];
+
+    const [result] = await pool.execute(sql, params);
+    console.log('Game registered:', result);
+
+  } catch (error) {
+    console.error('Error submitting game:', error);
+    return res.status(500).send('Error submitting game');
+  }
+  res.redirect('/my-games');
 });
 
-// Confirmation page (submit.ejs)
-app.get('/confirmation', (req, res) => {
-  res.render('submit', { games });
-});
 
 // Games list page
-app.get('/my-games', (req, res) => {
-  res.render('games', { games });
+app.get('/my-games', async (req, res) => {
+  try {
+    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?', [CURRENT_USER_ID]);
+    res.render('games', { games: rows[0] }); // pass the query 
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(500).send('Database connection failed');
+  }
+
 });
 
 // Wish list page
