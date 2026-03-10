@@ -8,6 +8,14 @@ import mysql2 from 'mysql2';
 dotenv.config();
 
 
+// POOL
+const pool = mysql2.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+}).promise();
 
 const app = express();
 const PORT = 3003;
@@ -18,6 +26,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const games = [];
 
+// Database Connection Test Route
+app.get('/db-test', async (req, res) => {
+  try {
+    const rows = await pool.query('SELECT * FROM user_games');
+    res.send(rows[0]);
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(500).send('Database connection failed');
+  }
+});
 // Home
 app.get('/', (req, res) => {
   res.render('home');
