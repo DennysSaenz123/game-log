@@ -61,4 +61,13 @@ a {
     border-radius: 8px;
     margin-top: 10px;
 }
-
+.logo-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.logo {
+  width: 500px;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
