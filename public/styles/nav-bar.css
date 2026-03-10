@@ -32,3 +32,16 @@ nav {
     --secondary-color: #000000;
     --background-color: #f0f4ff;
 }
+.title{
+    font-family: "Audiowide", sans-serif;
+    font-size: 70px;
+    letter-spacing: 4px;
+    color: black;
+
+    text-shadow: 0 4px 10px rgba(0,0,0,0.35);
+}
+.title:hover{
+    text-shadow:
+        0 0 10px rgba(45,95,138,0.6),
+        0 0 20px rgba(45,95,138,0.4);
+}
