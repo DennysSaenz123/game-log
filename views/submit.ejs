@@ -13,19 +13,5 @@
 <body>
     <%- include('header') %>
     <h1>Game Submissions</h1>
-
-<% if (games.length === 0) { %>
-    <p>No games submitted yet.</p>
-<% } %>
-
-<% games.forEach(game => { %>
-    <div>
-        <p><strong>Title:</strong> <%= game.title %></p>
-        <p><strong>Status:</strong> <%= game.status %></p>
-        <p><strong>Rating:</strong> <%= game.rating %></p>
-        <p><strong>Submitted:</strong> <%= game.timestamp %></p>
-    </div>
-    <hr>
-<% }) %>
 </body>
 </html>
