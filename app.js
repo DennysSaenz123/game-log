@@ -94,8 +94,15 @@ app.get('/my-games', async (req, res) => {
 });
 
 // Wish list page
-app.get('/wish-list', (req, res) => {
-  res.render('wish-list');
+app.get('/wishlist', async (req, res) => {
+    try {
+    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1', [CURRENT_USER_ID]);
+    res.render('wish-list', { games: rows[0] }); // pass the query 
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(500).send('Database connection failed');
+  }
+
 });
 
 // Registration page
