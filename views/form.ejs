@@ -30,10 +30,9 @@
             <input type="text" id="title" name="title" placeholder="Enter game title">
             <span class="err" id="err-title">Please add title</span>
         </div>
-
+        <h3>Status</h3>
         <!--Status-->
         <div>
-            <p>Status</p>
 
             <label>
                 <input type="radio" name="status" value="playing">
@@ -70,11 +69,9 @@
             </select>
             <span class="err" id="err-rating">Please select rating</span>
         </div>
-
+         <h3>Genres</h3>
         <!-- Genres  -->
-        <div>
-            <p>Genres</p>
-
+        <div class="genres">
             <label class="genre-item">
                 <input type="checkbox" name="genres" value="action">
                 <span>Action</span>
@@ -99,7 +96,51 @@
                 <input type="checkbox" name="genres" value="strategy">
                 <span>Strategy</span>
             </label>
-            <span class="err" id="err-genres">Please select at least one genre</span>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="sandbox">
+                <span>Sandbox</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="survival">
+                <span>Survival</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="shooter">
+                <span>Shooter</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="fighting">
+                <span>Fighting</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="racing">
+                <span>Racing</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="simulation">
+                <span>Simulation</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="open">
+                <span>Open World</span>
+            </label>
+            
+            <label class="genre-item">
+                <input type="checkbox" name="genres" value="puzzle">
+                <span>Puzzle</span>
+            </label>
+        </div>
+        <span class="err" id="err-genres">Please select at least one genre</span>
+        <h3>Notes</h3>
+        <div class="form-group">
+            <textarea id="notes" name="notes" rows="4" placeholder="Write your thoughts about the game..." maxlength="400"></textarea>
         </div>
 
         <!-- Submit Button -->
