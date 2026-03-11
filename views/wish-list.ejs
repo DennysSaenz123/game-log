@@ -3,19 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wish-list</title>
-    <!-- Nav Bar Styles-->
-    <link rel="stylesheet" href="/styles/nav-bar.css">
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="/styles/home.css">
+    <title>Wishlist</title>
     <!--page icon-->
-    <link rel="icon" href="/images/game-logo.png">
-    <!--font family for title-->
+    <link rel="icon" href="/images/game-icon.webp">     
+     <!-- Nav Bar Styles -->
+      <link rel="stylesheet" href="/styles/nav-bar.css">
+          <!-- Main Styles -->
+     <link rel="stylesheet" href="/styles/home.css">
+     <!--font family for title-->
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 </head>
 <body>
     <%- include('header') %>
     <h1>My Wishlist</h1>
-    
+    <% if (games && games.length) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Rating</th>
+            <th>Genres</th>
+            <th>Wishlist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% games.forEach(function(game) { %>
+            <tr>
+              <td><%= game.title ?? '' %></td>
+              <td><%= game.status ?? '' %></td>
+              <td><%= game.rating === null ? '' : game.rating %></td>
+              <td><%= game.genres ?? '' %></td>
+              <td><%= game.wishlist ? 'Yes' : 'No' %></td>
+              <td><%= game.notes ?? ''%></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No games found.</p>
+    <% } %>
+  </main>
 </body>
 </html>
