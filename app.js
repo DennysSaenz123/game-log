@@ -8,7 +8,7 @@ import mysql2 from 'mysql2';
 dotenv.config();
 
 // temporary user id for testing
-const CURRENT_USER_ID = 1;
+const CURRENT_USER_ID = 1; // <- This acts as the current user that's logged in. This changes in a real app, until we get login and registration fully working.
 
 
 // POOL
