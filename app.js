@@ -58,7 +58,7 @@ app.post('/add-game', async (req, res) => {
   const gameForm = req.body;
 
   try {
-    const sql = 'INSERT INTO user_games (user_id, title, status, rating, genres, wishlist) VALUES (?,?,?,?,?,?)';
+    const sql = 'INSERT INTO user_games (user_id, title, status, rating, genres, wishlist,notes) VALUES (?,?,?,?,?,?,?)';
 
     const params = [
       CURRENT_USER_ID,
@@ -66,7 +66,8 @@ app.post('/add-game', async (req, res) => {
       gameForm.status ?? null,
       gameForm.rating ? Number(gameForm.rating) : null,
       gameForm.genres ?? null,
-      1,
+      1, // this is the wishlist flag. set to 1 for now
+      gameForm.notes ?? null
     ];
 
     const [result] = await pool.execute(sql, params);
