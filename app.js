@@ -152,13 +152,15 @@ app.post('/register', async (req, res) => {
     console.log('User registered:', result);
   res.redirect('/my-games');
     }
-    catch (err){
-      console.error('Error registering user:', err);
-      alert('Error registering user');
-      if(err.code === 'ER_DUP_ENTRY') {
-        alert('Username or email already exists');
-      }
+    catch (err) {
+    console.error('Error registering user:', err);
+
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(400).send('Username or email already exists');
     }
+
+    return res.status(500).send('Error registering user');
+  }
 
   });
 
