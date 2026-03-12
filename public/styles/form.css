@@ -30,7 +30,7 @@ body {
   box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
-.form h2 {
+ h2 {
   color: #2563eb;       
   margin-bottom: 18px;
   text-align: center;
@@ -39,7 +39,15 @@ body {
 
 
 /* form layout */
-#addGameForm, #registerForm div {
+#registerForm div {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin: 10px;
+  gap: 16px;
+
+}
+#signInForm div {
   display: flex;
   flex-direction: column;
   padding: 12px;
@@ -54,7 +62,7 @@ body {
 }
 
 /* fieldset layout */
-#addGameForm fieldset {
+fieldset {
   border-top: 1px solid var(--secondary-color);
   border-bottom: none;
   border-left: none;
@@ -64,10 +72,12 @@ body {
   border-radius: 8px;
 }
 
+
 fieldset legend{
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--primary-color);
+  text-align: center;
 }
 #addGameForm legend {
   margin-bottom: 12px;
@@ -102,7 +112,7 @@ input[type="text"], input[type="password"] {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-weight: normal;
+
 }
 
 #addGameForm h3 + div {
