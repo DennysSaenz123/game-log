@@ -66,6 +66,7 @@ app.get('/db-test', async (req, res) => {
 
 // Sign in Page
 app.get('/', (req, res) => {
+  res.redirect('/sign-in');
   res.render('sign_in_form');
 
 });
