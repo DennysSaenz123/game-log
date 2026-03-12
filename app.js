@@ -107,7 +107,7 @@ app.post('/add-game', async (req, res) => {
 // Games list page
 app.get('/my-games',requireLogin, async (req, res) => {
   try {
-    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?',     [req.session.userId]);
+    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?',[req.session.userId]);
     res.render('games', { games: rows[0] }); // pass the query 
   } catch (error) {
     console.error('Database connection failed:', error);
@@ -119,7 +119,7 @@ app.get('/my-games',requireLogin, async (req, res) => {
 // Wish list page
 app.get('/wishlist', async (req, res) => {
     try {
-    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1', [CURRENT_USER_ID]);
+    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1', [req.session.userId]);
     res.render('wish-list', { games: rows[0] }); // pass the query 
   } catch (error) {
     console.error('Database connection failed:', error);
