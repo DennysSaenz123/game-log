@@ -1,62 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="/styles/form.css"> 
-    <link rel="stylesheet" href="/styles/nav-bar.css">
-    <!--page icon-->
-    <link rel="icon" href="/images/game-logo.png">
-    <!--font family for title-->
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-    <!-- Script -->
-<script src="/js/register_val.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="/styles/form.css">
+  <link rel="stylesheet" href="/styles/nav-bar.css">
+  <!--page icon-->
+  <link rel="icon" href="/images/game-logo.png">
+  <!--font family for title-->
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <!-- Script -->
+  <script src="/js/form_val.js" defer></script>
 
 </head>
+
 <body>
-    <%- include('header') %>
-    <section class="form">
+  <%- include('header') %>
+  <section class="form">
     <h2>Register</h2>
     <form id="registerForm" action="" method="post">
-        <!--Personal Information-->
+      <!--Personal Information-->
+      <fieldset>
+        <legend>Personal Information</legend>
         <div>
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
-            <span class="err" id="err-firstName">Please add first name</span>
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+          <span class="err" id="err-firstName">Please add first name</span>
         </div>
         <div>
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
-            <span class="err" id="err-lastName">Please add last name</span>
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+          <span class="err" id="err-lastName">Please add last name</span>
         </div>
 
-                <!--Email-->
+        <!--Email-->
         <div>
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Enter email">
-            <span class="err" id="err-email">Please add email</span>
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter email">
+          <span class="err" id="err-email">Please add email</span>
         </div>
+      </fieldset>
+
+
+
+      <!-- Account Information -->
+      <fieldset>
+        <legend>Account Information</legend>
+
         <!--Username-->
+
         <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter username">
-            <span class="err" id="err-username">Please add username</span>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter username">
+          <span class="err" id="err-username">Please add username</span>
         </div>
         <!--Password-->
         <div>
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password" placeholder="Enter password">
-            <span class="err" id="err-password">Please add password</span>
-            </div>
-
-        <!-- Submit Button -->
-         <div>
-        <button type="submit">Register</button>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter password">
+          <span class="err" id="err-password">Please add password</span>
         </div>
 
+      </fieldset>
+
+
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit">Register</button>
+      </div>
+
     </form>
-</section>
+  </section>
 </body>
+
 </html>
