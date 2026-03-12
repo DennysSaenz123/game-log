@@ -4,11 +4,11 @@ import dotenv from 'dotenv';
 
 import mysql2 from 'mysql2';
 
+import session from 'express-session';
+
+
 //dotenv config
 dotenv.config();
-
-// temporary user id for testing
-const CURRENT_USER_ID = 1; // <- This acts as the current user that's logged in. This changes in a real app, until we get login and registration fully working.
 
 
 // POOL
@@ -28,6 +28,19 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(session({ 
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use((req, res, next) => {
+  res.locals.loggedIn = !!req.session.userId;
+  res.locals.username = req.session.username || null;
+  next();
+});
+
+
 const games = []; //in-memory array
 
 
@@ -41,6 +54,16 @@ app.get('/db-test', async (req, res) => {
     res.status(500).send('Database connection failed');
   }
 });
+
+
+  function requireLogin(req, res, next) {
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+    next();
+}
+
+
 // Home
 app.get('/', (req, res) => {
   res.render('home');
@@ -53,7 +76,7 @@ app.get('/add-game', (req, res) => {
 });
 
 // Handle form submit
-app.post('/add-game', async (req, res) => {
+app.post('/add-game', requireLogin, async (req, res) => {
 
   const gameForm = req.body;
 
@@ -61,7 +84,7 @@ app.post('/add-game', async (req, res) => {
     const sql = 'INSERT INTO user_games (user_id, title, status, rating, genres, wishlist,notes) VALUES (?,?,?,?,?,?,?)';
 
     const params = [
-      CURRENT_USER_ID,
+      req.session.userId, // get user ID
       gameForm.title ?? null,
       gameForm.status ?? null,
       gameForm.rating ? Number(gameForm.rating) : null,
@@ -84,7 +107,7 @@ app.post('/add-game', async (req, res) => {
 // Games list page
 app.get('/my-games', async (req, res) => {
   try {
-    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?', [CURRENT_USER_ID]);
+    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?',     [req.session.userId]);
     res.render('games', { games: rows[0] }); // pass the query 
   } catch (error) {
     console.error('Database connection failed:', error);
@@ -137,11 +160,38 @@ app.post('/register', async (req, res) => {
   });
 
   //Sign in page
+
   app.get('/sign-in', (req, res) => {
     res.render('sign_in_form');
-  }
+
+}
   );
-  
+  app.post('/sign-in', async (req, res) => {
+        const { username, password } = req.body;
+
+    try {
+      const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
+      const params = [username, password];
+      const [rows] = await pool.execute(sql, params);
+
+      // Store the logged-in user's ID in the session
+    req.session.userId = rows[0].user_id; // Assuming the user's ID is in the 'id' column
+    req.session.userId = rows[0].username;
+    res.redirect('/my-games');
+  }
+  catch (err){
+    console.error('Error signing in:', err);
+    res.status(500).send('Error signing in');
+  }
+
+});
+
+
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
+});
 
 
 app.listen(PORT, () => {
