@@ -64,10 +64,13 @@ app.get('/db-test', async (req, res) => {
 }
 
 
-// Home
+// Sign in Page
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('sign_in_form');
 
+});
+app.get('/home', requireLogin, (req, res) => {
+  res.render('home');
 });
 
 // Show form
@@ -185,7 +188,7 @@ app.post('/register', async (req, res) => {
     req.session.userId = rows[0].user_id; // Assuming the user's ID is in the 'id' column
     req.session.username = rows[0].username; // Store the username in the session
     
-    res.redirect('/my-games');
+    res.redirect('/home');
   }
   catch (err){
     console.error('Error signing in:', err);
@@ -197,7 +200,7 @@ app.post('/register', async (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/');
+    res.redirect('/home');
   });
 });
 
