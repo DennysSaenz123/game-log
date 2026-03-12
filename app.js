@@ -156,7 +156,9 @@ app.post('/register', async (req, res) => {
     console.error('Error registering user:', err);
 
     if (err.code === 'ER_DUP_ENTRY') {
-      return res.status(400).send('Username or email already exists');
+      return res.render('account_err', {
+        message: 'Username or email already exists'
+      });
     }
 
     return res.status(500).send('Error registering user');
