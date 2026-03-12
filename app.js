@@ -136,6 +136,13 @@ app.post('/register', async (req, res) => {
 
   });
 
+  //Sign in page
+  app.get('/sign-in', (req, res) => {
+    res.render('sign_in_form');
+  }
+  );
+  
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
