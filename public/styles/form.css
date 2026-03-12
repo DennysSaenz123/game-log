@@ -178,3 +178,13 @@ button:hover {
   font-size: 0.9rem;
   display: none; 
 }
+
+.game-logo{
+    font-family: "Audiowide", sans-serif;
+    font-size: 70px;
+    letter-spacing: 4px;
+    color: var(--secondary-color);
+    pointer-events: none;
+    user-select: none;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.35);
+}
