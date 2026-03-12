@@ -2,11 +2,16 @@
   <div class="nav-container">
     <h2 class="title">GAME LOG</h2>
 
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/add-game">Add Game</a></li>
-      <li><a href="/my-games">Game List</a></li>
-      <li><a href="/wish-list">Wish List</a></li>
-    </ul>
+<ul class="nav">
+  <% if (!loggedIn) { %>
+    <li><a href="/register">Register</a></li>
+    <li><a href="/sign-in">Sign In</a></li>
+  <% } else { %>
+    <li><a href="/my-games">My Games</a></li>
+    <li><a href="/wishlist">Wishlist</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li class="welcome">Welcome, <%= username %>!</li>
+  <% } %>
+</ul>
   </div>
 </nav>
