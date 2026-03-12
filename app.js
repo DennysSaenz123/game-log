@@ -154,7 +154,10 @@ app.post('/register', async (req, res) => {
     }
     catch (err){
       console.error('Error registering user:', err);
-      res.status(500).send('Error registering user');
+      alert('Error registering user');
+      if(err.code === 'ER_DUP_ENTRY') {
+        alert('Username or email already exists');
+      }
     }
 
   });
