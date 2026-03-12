@@ -4,10 +4,20 @@
   box-sizing: border-box;
 }
 
+/* body and title */
+:root{
+  --primary-color: #1e588a;
+  --accent-color: #2563eb;
+  --secondary-color: #000000;
+  --gradient-color: #cbd5e1;
+  --background-color: #f0f4ff;
+  --error-color: #dc2626;
+}
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Audiowide", sans-serif;
+  letter-spacing: 2px;
   background: #f1f5f9;  
-  color: #0f172a;
+  color: var(--secondary-color);
 }
 
 /* card */
@@ -27,15 +37,28 @@ body {
 }
 
 
-#addGameForm, #registerForm > div {
+
+/* form layout */
+#addGameForm, #registerForm div {
   display: flex;
   flex-direction: column;
   margin: 10px;
   gap: 16px;
+  text-align: center;
 }
+
 /* radio + checkbox labels */
 #addGameForm, #registerForm label {
   font-weight: normal;
+}
+
+/* fieldset */
+fieldset{
+  border: 1px solid var(--gradient-color);
+  margin: 16px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  text-align: center;
 }
 
 label, p {
@@ -45,11 +68,11 @@ label, p {
 /* inputs */
 select {
   padding: 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--gradient-color);
   border-radius: 8px;
   font-size: 1rem;
 }
-input[type="text"] {
+input[type="text"], input[type="password"] {
   padding: 10px;
   border-radius: .75rem;
   
@@ -64,29 +87,6 @@ input[type="checkbox"]{
   margin: .45rem 0 .5rem 0;
   gap: 16px;
   cursor: pointer;
-}
-
-
-/* button */
-button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1d4ed8;
-}
-
-/* error */
-.err {
-  color: darkred;
-  font-size: 0.9rem;
-  display: none; 
 }
 .genres {
   display: grid;
@@ -106,8 +106,31 @@ textarea {
   width: 100%;
   min-height: 120px;
   padding: 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--gradient-color);
   border-radius: 8px;
   font-size: 1rem;
   resize: vertical;
+}
+
+
+/* button */
+button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-color);
+}
+
+/* error */
+.err {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  display: none; 
 }
