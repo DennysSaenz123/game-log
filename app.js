@@ -117,7 +117,7 @@ app.get('/my-games',requireLogin, async (req, res) => {
 });
 
 // Wish list page
-app.get('/wishlist', async (req, res) => {
+app.get('/wishlist', requireLogin, async (req, res) => {
     try {
     const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1', [req.session.userId]);
     res.render('wish-list', { games: rows[0] }); // pass the query 
