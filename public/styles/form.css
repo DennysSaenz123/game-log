@@ -42,23 +42,40 @@ body {
 #addGameForm, #registerForm div {
   display: flex;
   flex-direction: column;
+  padding: 12px;
   margin: 10px;
   gap: 16px;
-  text-align: center;
+
 }
 
 /* radio + checkbox labels */
-#addGameForm, #registerForm label {
+#registerForm label {
   font-weight: normal;
 }
 
-/* fieldset */
-fieldset{
-  border: 1px solid var(--gradient-color);
-  margin: 16px;
-  padding-bottom: 12px;
+/* fieldset layout */
+#addGameForm fieldset {
+  border-top: 1px solid var(--secondary-color);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  padding: 20px 10px 16px;
+  margin: 20px 0;
   border-radius: 8px;
-  text-align: center;
+}
+
+fieldset legend{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+#addGameForm legend {
+  margin-bottom: 12px;
+}
+#addGameForm fieldset > div{
+  gap: 12px;
+  margin-bottom: 16px;
+
 }
 
 label, p {
@@ -77,8 +94,24 @@ input[type="text"], input[type="password"] {
   border-radius: .75rem;
   
 }
+#addGameForm div label input[type="radio"] {
+  margin-right: 6px;
+}
+
+#addGameForm div label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
+}
+
+#addGameForm h3 + div {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 input[type="checkbox"]{
-  display: inline-block;
   cursor: pointer;
 }
 .genre-item {
@@ -90,8 +123,9 @@ input[type="checkbox"]{
 }
 .genres {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  width: 100%;
 }
 .genre-item {
   display: flex;
