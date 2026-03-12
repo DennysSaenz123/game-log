@@ -56,9 +56,9 @@ app.get('/db-test', async (req, res) => {
 });
 
 
-  function requireLogin(req, res, next) {
+  function requireLogin(req, res, next) { // middleware function checking for login
     if (!req.session.userId) {
-        return res.redirect("/login");
+        return res.redirect("/sign-in");
     }
     next();
 }
@@ -76,7 +76,7 @@ app.get('/add-game', (req, res) => {
 });
 
 // Handle form submit
-app.post('/add-game', requireLogin, async (req, res) => {
+app.post('/add-game', async (req, res) => {
 
   const gameForm = req.body;
 
@@ -105,7 +105,7 @@ app.post('/add-game', requireLogin, async (req, res) => {
 
 
 // Games list page
-app.get('/my-games', async (req, res) => {
+app.get('/my-games',requireLogin, async (req, res) => {
   try {
     const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?',     [req.session.userId]);
     res.render('games', { games: rows[0] }); // pass the query 
@@ -150,7 +150,7 @@ app.post('/register', async (req, res) => {
     ];
     const result = await pool.execute(sql, params);
     console.log('User registered:', result);
-  res.redirect('/confirmation');
+  res.redirect('/my-games');
     }
     catch (err){
       console.error('Error registering user:', err);
@@ -176,7 +176,8 @@ app.post('/register', async (req, res) => {
 
       // Store the logged-in user's ID in the session
     req.session.userId = rows[0].user_id; // Assuming the user's ID is in the 'id' column
-    req.session.userId = rows[0].username;
+    req.session.username = rows[0].username; // Store the username in the session
+    
     res.redirect('/my-games');
   }
   catch (err){
