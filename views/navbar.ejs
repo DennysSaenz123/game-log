@@ -8,11 +8,23 @@
     <li><a href="/sign-in">Sign In</a></li>
   <% } else { %>
 
-    <li><a href="/my-games">My Games</a></li>
-    <li><a href="/wishlist">Wishlist</a></li>
-    <li><a href="/logout">Logout</a></li>
       <h1>Hello, <%= username %>!</h1>
   <% } %>
+  <% if (page === "/my-games")  { %>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/wishlist">Wishlist</a></li>
+    <li><a href="/logout">Logout</a></li>
+  <% } %>
+    <% if (page === "/wishlist")  { %>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/my-games">My Games</a></li>
+    <li><a href="/logout">Logout</a></li>
+  <% } %>
+    <% if (page === "/add-game")  { %>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/logout">Logout</a></li>
+  <% } %>
+
 </ul>
 
   </div>
