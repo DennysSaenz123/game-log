@@ -40,6 +40,14 @@ app.use((req, res, next) => {
   next();
 });
 
+function requireLogin(req, res, next) { // middleware function checking for login
+  if (!req.session.userId) {
+      return res.redirect("/sign-in");
+  }
+  next();
+}
+
+
 
 const games = []; //in-memory array
 
@@ -54,15 +62,6 @@ app.get('/db-test', async (req, res) => {
     res.status(500).send('Database connection failed');
   }
 });
-
-
-  function requireLogin(req, res, next) { // middleware function checking for login
-    if (!req.session.userId) {
-        return res.redirect("/sign-in");
-    }
-    next();
-}
-
 
 // Sign in Page
 app.get('/', (req, res) => {
