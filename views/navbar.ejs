@@ -3,12 +3,14 @@
     <h2 class="title">GAME LOG</h2>
 
 <ul class="nav">
-  <% if (!loggedIn) { %>
+  <% if (!loggedIn || !loggedIn && page !== "/sign-in") { %>
     <li><a href="/register">Register</a></li>
     <li><a href="/sign-in">Sign In</a></li>
   <% } else { %>
-
       <h1>Hello, <%= username %>!</h1>
+  <% } %>
+  <% if (page === "/home")  { %>
+    <li><a href="/logout">Logout</a></li>
   <% } %>
   <% if (page === "/my-games")  { %>
     <li><a href="/home">Home</a></li>
