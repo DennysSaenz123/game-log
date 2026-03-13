@@ -21,7 +21,7 @@ body {
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3,1fr);
   gap: 24px;
 }
 
@@ -81,4 +81,18 @@ body {
   font-size: 1.1rem;
   margin-top: 40px;
   color: #333;
+}
+.genres {
+  margin-top: 10px;
+}
+
+.genre-tag {
+  display: inline-block;
+  background: #2d3c75;
+  color: #d7ddf5;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin: 4px 6px 0 0;
+  border: 1px solid #4c6fff;
 }
