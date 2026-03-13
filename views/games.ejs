@@ -36,12 +36,13 @@
               <span class="label">Genres:</span>
 
               <% if (game.genres) { 
-                  const genreList = JSON.parse(game.genres);
-                  genreList.forEach(function(genre){ %>
-
-                    <span class="genre-tag"><%= genre %></span>
-
-              <% }); } %>
+                const genreList = game.genres.split(',');
+                genreList.forEach(function(genre) { %>
+                  <span class="genre-tag"><%= genre.trim() %></span>
+            <%   });
+              } else { %>
+                <span>No genres listed</span>
+              <% }; %>
             </div>
             <p><span class="label">Wishlist:</span> <%= game.wishlist ? 'Yes' : 'No' %></p>
             <p><span class="label">Notes:</span> <%= game.notes ?? 'No notes yet' %></p>
