@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  background-color: #d9dde8;
+  font-family: Arial, sans-serif;
+  color: #111;
+}
+
+.games-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.page-title {
+  text-align: center;
+  font-family: 'Audiowide', sans-serif;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.game-card {
+  background: #1a1f2e;
+  border: 2px solid #4c6fff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.game-title {
+  margin: 0;
+  font-family: 'Audiowide', sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.status-badge {
+  background: #4c6fff;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.card-body p {
+  margin: 10px 0;
+  color: #d7ddf5;
+  line-height: 1.5;
+}
+
+.label {
+  color: #8fb3ff;
+  font-weight: bold;
+}
+
+.empty-state {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 40px;
+  color: #333;
+}
