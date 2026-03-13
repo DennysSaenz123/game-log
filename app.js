@@ -37,6 +37,7 @@ app.use(session({
 app.use((req, res, next) => {
   res.locals.loggedIn = !!req.session.userId;
   res.locals.username = req.session.username || null;
+  res.locals.page = req.path;
   next();
 });
 
