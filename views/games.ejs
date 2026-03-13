@@ -18,30 +18,40 @@
     <script src="/scripts/form_val.js" defer></script>
 </head>
 <body>
-    <%- include('navbar') %>
-    <main class="games-page">
-      <h1 class="page-title">My Games</h1>
-    <% if (games && games.length) { %>
-      <section class = "games-grid">
-          <% games.forEach(function(game) { %>
-            <article class="game-card">
-              <div class="card-top">
-              <h2 class="game-title"><%= game.title ?? 'Untitled Game' %></h2>
-              <span class="status-badge"><%= game.status ?? 'No Status' %></span>
-            </div>
+  <%- include('navbar') %>
+  <main class="games-page">
+    <h1 class="page-title">My Games</h1>
+  <% if (games && games.length) { %>
+    <section class = "games-grid">
+        <% games.forEach(function(game) { %>
+          <article class="game-card">
+            <div class="card-top">
+            <h2 class="game-title"><%= game.title ?? 'Untitled Game' %></h2>
+            <span class="status-badge"><%= game.status ?? 'No Status' %></span>
+          </div>
 
-            <div class="card-body">
-              <p><span class="label">Rating:</span> <%= game.rating === null ? 'N/A' : game.rating + '/10' %></p>
-              <p><span class="label">Genres:</span> <%= game.genres ?? 'None listed' %></p>
-              <p><span class="label">Wishlist:</span> <%= game.wishlist ? 'Yes' : 'No' %></p>
-              <p><span class="label">Notes:</span> <%= game.notes ?? 'No notes yet' %></p>
+          <div class="card-body">
+            <p><span class="label">Rating:</span> <%= game.rating === null ? 'N/A' : game.rating + '/10' %></p>
+            <div class="genres">
+              <span class="label">Genres:</span>
+
+              <% if (game.genres) { 
+                  const genreList = JSON.parse(game.genres);
+                  genreList.forEach(function(genre){ %>
+
+                    <span class="genre-tag"><%= genre %></span>
+
+              <% }); } %>
             </div>
-          </article>
-        <% }); %>
-      </section>
-    <% } else { %>
-      <p class="empty-state">No games found yet. Add your first game.</p>
-    <% } %>
+            <p><span class="label">Wishlist:</span> <%= game.wishlist ? 'Yes' : 'No' %></p>
+            <p><span class="label">Notes:</span> <%= game.notes ?? 'No notes yet' %></p>
+          </div>
+        </article>
+      <% }); %>
+    </section>
+  <% } else { %>
+    <p class="empty-state">No games found yet. Add your first game.</p>
+  <% } %>
   </main>
 </body>
 </html>
