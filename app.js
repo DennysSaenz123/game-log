@@ -63,147 +63,154 @@ app.get('/db-test', async (req, res) => {
   }
 });
 
-// Sign in Page
+// Home route - first page shown
 app.get('/', (req, res) => {
   res.redirect('/sign-in');
-  res.render('sign_in_form');
-
 });
+
+// Sign-in page
+app.get('/sign-in', (req, res) => {
+  res.render('sign_in_form');
+});
+
+// Handle sign-in
+app.post('/sign-in', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
+    const [rows] = await pool.execute(sql, [username, password]);
+
+    if (rows.length === 0) {
+      return res.render('account_err', {
+        message: 'Invalid username or password',
+      });
+    }
+
+    req.session.userId = rows[0].user_id;
+    req.session.username = rows[0].username;
+
+    res.redirect('/home');
+  } catch (err) {
+    console.error('Error signing in:', err);
+    res.status(500).send('Error signing in');
+  }
+});
+
+// Home page
 app.get('/home', requireLogin, (req, res) => {
   res.render('home');
 });
 
-// Show form
-app.get('/add-game', (req, res) => {
-  res.render('form');
-});
-
-// Handle form submit
-app.post('/add-game', async (req, res) => {
-
-  const gameForm = req.body;
-
-  try {
-    const sql = 'INSERT INTO user_games (user_id, title, status, rating, genres, wishlist,notes) VALUES (?,?,?,?,?,?,?)';
-
-    const params = [
-      req.session.userId, // get user ID
-      gameForm.title ?? null,
-      gameForm.status ?? null,
-      gameForm.rating ? Number(gameForm.rating) : null,
-      gameForm.genres ?? null,
-      1, // this is the wishlist flag. set to 1 for now
-      gameForm.notes ?? null
-    ];
-
-    const [result] = await pool.execute(sql, params);
-    console.log('Game registered:', result);
-
-  } catch (error) {
-    console.error('Error submitting game:', error);
-    return res.status(500).send('Error submitting game');
-  }
-  res.redirect('/my-games');
-});
-
-
-// Games list page
-app.get('/my-games',requireLogin, async (req, res) => {
-  try {
-    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ?',[req.session.userId]);
-    res.render('games', { games: rows[0] }); // pass the query 
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    res.status(500).send('Database connection failed');
-  }
-
-});
-
-// Wish list page
-app.get('/wishlist', requireLogin, async (req, res) => {
-    try {
-    const rows = await pool.query('SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1', [req.session.userId]);
-    res.render('wish-list', { games: rows[0] }); // pass the query 
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    res.status(500).send('Database connection failed');
-  }
-
-});
-
 // Registration page
 app.get('/register', (req, res) => {
-
   res.render('register_form');
-
 });
 
-// Registration form handling
+// Handle registration
 app.post('/register', async (req, res) => {
-    const prof = req.body;
+  const prof = req.body;
+
   try {
-    const sql = 'INSERT INTO users (first_name,last_name,username, email, password) VALUES (?,?,?,?,?)'
+    const sql =
+      'INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)';
 
     const params = [
       prof.firstName,
       prof.lastName,
       prof.username,
       prof.email,
-      prof.password
+      prof.password,
     ];
-    const result = await pool.execute(sql, params);
+
+    const [result] = await pool.execute(sql, params);
     console.log('User registered:', result);
-  res.redirect('/my-games');
-    }
-    catch (err) {
+
+    res.redirect('/sign-in');
+  } catch (err) {
     console.error('Error registering user:', err);
 
     if (err.code === 'ER_DUP_ENTRY') {
       return res.render('account_err', {
-        message: 'Username or email already exists'
+        message: 'Username or email already exists',
       });
     }
 
-    return res.status(500).send('Error registering user');
+    res.status(500).send('Error registering user');
   }
-
-  });
-
-  //Sign in page
-
-  app.get('/sign-in', (req, res) => {
-    res.render('sign_in_form');
-
-}
-  );
-  app.post('/sign-in', async (req, res) => {
-        const { username, password } = req.body;
-
-    try {
-      const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
-      const params = [username, password];
-      const [rows] = await pool.execute(sql, params);
-
-      // Store the logged-in user's ID in the session
-    req.session.userId = rows[0].user_id; // Assuming the user's ID is in the 'id' column
-    req.session.username = rows[0].username; // Store the username in the session
-    
-    res.redirect('/home');
-  }
-  catch (err){
-    console.error('Error signing in:', err);
-    res.status(500).send('Error signing in');
-  }
-
 });
 
+// Show add game form
+app.get('/add-game', requireLogin, (req, res) => {
+  res.render('form');
+});
 
+// Handle add game
+app.post('/add-game', requireLogin, async (req, res) => {
+  const gameForm = req.body;
+
+  try {
+    const sql = `
+      INSERT INTO user_games (user_id, title, status, rating, genres, wishlist, notes)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const params = [
+      req.session.userId,
+      gameForm.title ?? null,
+      gameForm.status ?? null,
+      gameForm.rating ? Number(gameForm.rating) : null,
+      gameForm.genres ?? null,
+      1,
+      gameForm.notes ?? null,
+    ];
+
+    const [result] = await pool.execute(sql, params);
+    console.log('Game registered:', result);
+
+    res.redirect('/my-games');
+  } catch (error) {
+    console.error('Error submitting game:', error);
+    res.status(500).send('Error submitting game');
+  }
+});
+
+// My games page
+app.get('/my-games', requireLogin, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT * FROM user_games WHERE user_id = ?',
+      [req.session.userId]
+    );
+
+    res.render('games', { games: rows });
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(500).send('Database connection failed');
+  }
+});
+
+// Wishlist page
+app.get('/wishlist', requireLogin, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT * FROM user_games WHERE user_id = ? AND wishlist = 1',
+      [req.session.userId]
+    );
+
+    res.render('wish-list', { games: rows });
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(500).send('Database connection failed');
+  }
+});
+
+// Logout
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/home');
+    res.redirect('/sign-in');
   });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
