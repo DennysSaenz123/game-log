@@ -91,3 +91,10 @@ a {
         0 0 10px rgba(45,95,138,0.6),
         0 0 20px rgba(45,95,138,0.4);
 }
+
+.welcome-message{
+    text-align:center;
+    margin-top:5px;
+    margin-bottom:45px;
+    color:#1b7694;
+}

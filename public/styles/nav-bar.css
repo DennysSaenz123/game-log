@@ -46,3 +46,19 @@ nav {
         0 0 10px rgba(45,95,138,0.6),
         0 0 20px rgba(45,95,138,0.4);
 }
+
+.nav-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.nav-left{
+    /* justify-content:flex-start; */
+    margin-left:120px;
+}
+
+.nav-right{
+    /* justify-content:flex-end; */
+    margin-left:20px;
+}
