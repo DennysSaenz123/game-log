@@ -1,8 +1,24 @@
+let wishlistBtn = document.getElementById("wishlist-btn");
+        wishlistBtn.addEventListener("click", wishlistToggle);
+        function wishlistToggle(){
+            let wantStatus = document.querySelector('input[name="status"][value="want"]');
+            if(wishlistBtn.innerText === "Add Game To Wishlist") {
+                wishlistBtn.innerText = "Remove Game From Wishlist";
+                wantStatus.checked = true;
+            } else {
+                wishlistBtn.innerText = "Add Game To Wishlist";
+                wantStatus.checked = false;
+            }
+        }
+
 let addGameForm = document.getElementById("addGameForm");
 if (addGameForm) {
+
     addGameForm.onsubmit = (event) => {
         clearErrors();
         let isValid = true;
+        let wishlistBtn = document.getElementById("wishlist-btn");
+
 
         // validate title
         let title = document.getElementById("title").value.trim();
