@@ -1,3 +1,6 @@
+*{
+    font-family: 'Audiowide', sans-serif;
+}
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -12,7 +15,6 @@ body {
 
 .page-title {
   text-align: center;
-  font-family: 'Audiowide', sans-serif;
   font-size: 3rem;
   margin-bottom: 40px;
   color: #111;
