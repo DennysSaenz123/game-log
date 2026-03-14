@@ -1,6 +1,6 @@
 let wishlistBtn = document.getElementById("wishlist-btn");
 let wantStatus = document.querySelector('input[name="status"][value="want"]');
-let rating = document.getElementById("rating");
+const rating = document.getElementById("rating");
 
 // toggle wishlist manually
 wishlistBtn.addEventListener("click", wishlistToggle);
@@ -32,6 +32,7 @@ statusRadios.forEach(radio => {
             wishlistBtn.innerText = "Add Game To Wishlist";
             wishlistBtn.disabled = true;
             wantStatus.checked = false;
+            rating.disabled = false;
         }
     });
 });
@@ -67,17 +68,14 @@ if (addGameForm) {
             let wishlistBtn = document.getElementById("wishlist-btn");
             wishlistBtn.innerText = "Remove Game From Wishlist";
         }
-
         // validate rating
-        let rating = document.getElementById("rating").value;
-        if (rating.enabled && (rating < 1 || rating > 10)) {
-            document.getElementById("err-rating").style.display = "block";
-            isValid = false;
-        }
-        // if rating is disabled, ignore it
-        if (rating.disabled) {
-            document.getElementById("err-rating").style.display = "none";
-            isValid = true;
+        if (!rating.disabled) {
+            let ratingValue = parseInt(rating.value);
+
+            if (!ratingValue || ratingValue < 1 || ratingValue > 10) {
+                document.getElementById("err-rating").style.display = "block";
+                isValid = false;
+            }
         }
 
         // validate genres
