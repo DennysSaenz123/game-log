@@ -26,6 +26,7 @@ h1 {
     font-size: 2rem;
     color: var(--secondary-color);
     text-emphasis: none;
+    font-family: "Audiowide", sans-serif;
 }
 a {
     text-decoration: none;
