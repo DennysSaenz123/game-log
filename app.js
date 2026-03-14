@@ -162,7 +162,7 @@ app.post('/add-game', requireLogin, async (req, res) => {
       gameForm.status ?? null,
       gameForm.rating ? Number(gameForm.rating) : null,
       gameForm.genres ?? null,
-      1,
+      gameForm.status === 'want' ? 1 : 0,
       gameForm.notes ?? null,
     ];
 

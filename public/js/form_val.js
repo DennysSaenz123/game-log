@@ -1,15 +1,40 @@
 let wishlistBtn = document.getElementById("wishlist-btn");
-        wishlistBtn.addEventListener("click", wishlistToggle);
-        function wishlistToggle(){
-            let wantStatus = document.querySelector('input[name="status"][value="want"]');
-            if(wishlistBtn.innerText === "Add Game To Wishlist") {
-                wishlistBtn.innerText = "Remove Game From Wishlist";
-                wantStatus.checked = true;
-            } else {
-                wishlistBtn.innerText = "Add Game To Wishlist";
-                wantStatus.checked = false;
-            }
+let wantStatus = document.querySelector('input[name="status"][value="want"]');
+let rating = document.getElementById("rating");
+
+// toggle wishlist manually
+wishlistBtn.addEventListener("click", wishlistToggle);
+
+function wishlistToggle() {
+    if (wishlistBtn.innerText === "Add Game To Wishlist") {
+        wishlistBtn.innerText = "Remove Game From Wishlist";
+        // make rating select dropdown inactive
+        rating.disabled = true;
+        wantStatus.checked = true;
+    } else {
+        wishlistBtn.innerText = "Add Game To Wishlist";
+        wantStatus.checked = false;
+        rating.disabled = false;
+    }
+}
+
+//disable wishlist button when another status is selected
+let statusRadios = document.getElementsByName("status");
+
+statusRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+
+        if (radio.value === "want") {
+            // enable button when "want" is selected
+            wishlistBtn.disabled = false;
+        } else {
+            // reset and disable button for all other statuses
+            wishlistBtn.innerText = "Add Game To Wishlist";
+            wishlistBtn.disabled = true;
+            wantStatus.checked = false;
         }
+    });
+});
 
 let addGameForm = document.getElementById("addGameForm");
 if (addGameForm) {
@@ -17,7 +42,6 @@ if (addGameForm) {
     addGameForm.onsubmit = (event) => {
         clearErrors();
         let isValid = true;
-        let wishlistBtn = document.getElementById("wishlist-btn");
 
 
         // validate title
@@ -39,12 +63,21 @@ if (addGameForm) {
             document.getElementById("err-status").style.display = "block";
             isValid = false;
         }
+        if(status.value === "want") {
+            let wishlistBtn = document.getElementById("wishlist-btn");
+            wishlistBtn.innerText = "Remove Game From Wishlist";
+        }
 
         // validate rating
         let rating = document.getElementById("rating").value;
-        if (!rating) {
+        if (rating.enabled && (rating < 1 || rating > 10)) {
             document.getElementById("err-rating").style.display = "block";
             isValid = false;
+        }
+        // if rating is disabled, ignore it
+        if (rating.disabled) {
+            document.getElementById("err-rating").style.display = "none";
+            isValid = true;
         }
 
         // validate genres
