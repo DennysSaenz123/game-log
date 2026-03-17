@@ -46,19 +46,27 @@ nav {
         0 0 10px rgba(45,95,138,0.6),
         0 0 20px rgba(45,95,138,0.4);
 }
-
-.nav-container{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-.nav-left{
-    /* justify-content:flex-start; */
-    margin-left:120px;
+/* Left column: Title */
+.title {
+    flex: 1;
 }
 
-.nav-right{
-    /* justify-content:flex-end; */
-    margin-left:20px;
+/* Center column: Home / Wishlist / My Games */
+.center-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Right column: Logout / Register / Sign In */
+.right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
