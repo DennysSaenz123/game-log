@@ -1,53 +1,29 @@
-<!-- <nav class="navbar">
-  <div class="nav-container">
-    <h2 class="title">GAME LOG</h2>
-
-<ul class="nav">
-  <% if (!loggedIn || !loggedIn && page !== "/sign-in") { %>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/sign-in">Sign In</a></li>
-  <% } else { %>
-      <h1>Hello, <%= username %>!</h1>
-  <% } %>
-  <% if (page === "/home")  { %>
-    <li><a href="/logout">Logout</a></li>
-  <% } %>
-  </ul>
-  <ul class="nav">
-  <% if (page === "/my-games")  { %>
-    <li><a href="/home">Home</a></li>
-    <li><a href="/wishlist">Wishlist</a></li>
-    <li><a href="/logout">Logout</a></li>
-  <% } %>
-    <% if (page === "/wishlist")  { %>
-    <li><a href="/home">Home</a></li>
-    <li><a href="/my-games">My Games</a></li>
-    <li><a href="/logout">Logout</a></li>
-  <% } %>
-    <% if (page === "/add-game")  { %>
-    <li><a href="/home">Home</a></li>
-    <li><a href="/logout">Logout</a></li>
-  <% } %>
-
-</ul>
-
-  </div>
-</nav> -->
-
 <nav class="navbar">
   <div class="nav-container">
 
     <h2 class="title">GAME LOG</h2>
 
-    <ul class="nav nav-left">
-      <% if (loggedIn) { %>
+    <ul class="nav center-nav">
+      <% if (page === "/my-games") { %>
+        <li><a href="/wishlist">Wishlist</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/add-game">Add Game</a></li>
+      <% } %>
+
+      <% if (page === "/add-game") { %>
+        <li><a href="/wishlist">Wishlist</a></li>
         <li><a href="/home">Home</a></li>
         <li><a href="/my-games">My Games</a></li>
-        <li><a href="/wishlist">Wishlist</a></li>
+      <% } %>
+
+      <% if (page === "/wishlist") { %>
+        <li><a href="/my-games">My Games</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/add-game">Add Game</a></li>
       <% } %>
     </ul>
 
-    <ul class="nav nav-right">
+    <ul class="nav right-nav">
       <% if (!loggedIn) { %>
         <li><a href="/register">Register</a></li>
         <li><a href="/sign-in">Sign In</a></li>
