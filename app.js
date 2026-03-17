@@ -110,19 +110,19 @@ app.get('/register', (req, res) => {
 
 // Handle registration
 app.post('/register', async (req, res) => {
-  const prof = req.body;
+ const { firstName, lastName, username, email, password } = req.body;
+
+    if (!firstName || !lastName || !username || !email || !password) {
+    return res.render('account_err', {
+      message: 'All fields are required.',
+    });
+  }
 
   try {
     const sql =
       'INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)';
 
-    const params = [
-      prof.firstName,
-      prof.lastName,
-      prof.username,
-      prof.email,
-      prof.password,
-    ];
+    const params = [firstName, lastName, username, email, password];
 
     const [result] = await pool.execute(sql, params);
     console.log('User registered:', result);
