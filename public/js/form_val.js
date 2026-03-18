@@ -1,6 +1,6 @@
 let wishlistBtn = document.getElementById("wishlist-btn");
 let wantStatus = document.querySelector('input[name="status"][value="want"]');
-const rating = document.getElementById("rating");
+let placeholder = notes.placeholder;
 
 // toggle wishlist manually
 wishlistBtn.addEventListener("click", wishlistToggle);
@@ -10,13 +10,19 @@ function wishlistToggle() {
         wishlistBtn.innerText = "Remove Game From Wishlist";
         // make rating select dropdown inactive
         rating.disabled = true;
+        notes.disabled = true;
+        // change placeholder text for notes
+        notes.placeholder = "Notes cannot be added for games you want to play.";
         wantStatus.checked = true;
     } else {
         wishlistBtn.innerText = "Add Game To Wishlist";
+        notes.disabled = false;
+        notes.placeholder = placeholder;
         wantStatus.checked = false;
         rating.disabled = false;
     }
 }
+
 
 //disable wishlist button when another status is selected
 let statusRadios = document.getElementsByName("status");
@@ -32,11 +38,14 @@ statusRadios.forEach(radio => {
             wishlistBtn.innerText = "Add Game To Wishlist";
             wishlistBtn.disabled = true;
             wantStatus.checked = false;
+            // re-enable rating and notes when any non-want status is chosen
             rating.disabled = false;
+            notes.disabled = false;
+            notes.placeholder = placeholder;
         }
     });
 });
-
+/*
 let addGameForm = document.getElementById("addGameForm");
 if (addGameForm) {
 
@@ -171,3 +180,4 @@ function clearErrors() {
         errors[i].style.display = "none";
     }
 }
+    */
