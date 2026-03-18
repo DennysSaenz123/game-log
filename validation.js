@@ -41,12 +41,12 @@ export function validateGameForm(gameForm) {
   }
 
   // rating validation
-  if (!gameForm.rating) {
+  if (!gameForm.rating && gameForm.status !== 'want') {
     errors.push('Please select a rating.');
   } else {
     const ratingNumber = Number(gameForm.rating);
 
-    if (isNaN(ratingNumber) || ratingNumber < 1 || ratingNumber > 10) {
+    if (isNaN(ratingNumber) && gameForm.status !== 'want'|| ratingNumber < 1 || ratingNumber > 10) {
       errors.push('Rating must be between 1 and 10.');
     }
   }
@@ -66,5 +66,14 @@ export function validateGameForm(gameForm) {
     errors.push('Notes cannot be more than 400 characters.');
   }
 
+  // additional validation for want status and wishlist button
+  if (gameForm.status === 'want' && gameForm.rating) {
+    errors.push('Cannot have a rating for a game you want to play.');
+  }
+  if(gameForm.status === 'want' && gameForm.notes) {
+    errors.push('Cannot have notes for a game you want to play.');
+  }
   return errors;
+
+
 }
