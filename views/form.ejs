@@ -15,13 +15,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 
     <!-- Script -->
-<script src="/js/form_val.js" defer></script>
+<!-- <script src="/js/form_val.js" defer></script> -->
 
 </head>
 <body>
     <%- include('navbar') %>
     <section class="form">
     <h2>Add a Game</h2>
+
+    <!-- server-side validation errors -->
+    <% if (errors && errors.length > 0) { %>
+        <div class="server-errors">          
+            <% errors.forEach(error => { %>
+                <p><%= error %></p>
+            <% }) %>     
+        </div>
+    <% } %>
 
     <form id="addGameForm" action="/add-game" method="post">
         <fieldset>

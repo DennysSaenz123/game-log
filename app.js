@@ -6,6 +6,8 @@ import mysql2 from 'mysql2';
 
 import session from 'express-session';
 
+import { validateGameForm } from './validation.js';
+
 
 //dotenv config
 dotenv.config();
@@ -141,14 +143,29 @@ app.post('/register', async (req, res) => {
   }
 });
 
+
 // Show add game form
 app.get('/add-game', requireLogin, (req, res) => {
-  res.render('form');
+  res.render('form', {
+    errors: [],
+    formData: {}
+  });
 });
 
 // Handle add game
 app.post('/add-game', requireLogin, async (req, res) => {
   const gameForm = req.body;
+
+  // run server-side validation
+  const errors = validateGameForm(gameForm);
+
+  // if errors exist, show the same form again
+  if (errors.length > 0) {
+    return res.render('form', {
+      errors,
+      formData: gameForm
+    });
+  }
 
   try {
     const sql = `
@@ -156,14 +173,25 @@ app.post('/add-game', requireLogin, async (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
+    // make genres into a string for database
+    const genresValue = Array.isArray(gameForm.genres)
+      ? gameForm.genres.join(', ')
+      : gameForm.genres;
+
     const params = [
       req.session.userId,
-      gameForm.title ?? null,
-      gameForm.status ?? null,
-      gameForm.rating ? Number(gameForm.rating) : null,
-      gameForm.genres ?? null,
+
+      // Ctrim title 
+      gameForm.title.trim(),
+
+      gameForm.status,
+      Number(gameForm.rating),
+
+      genresValue,
+
       gameForm.status === 'want' ? 1 : 0,
-      gameForm.notes ?? null,
+
+      gameForm.notes ? gameForm.notes.trim() : null,
     ];
 
     const [result] = await pool.execute(sql, params);
