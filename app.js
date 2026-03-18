@@ -6,7 +6,9 @@ import mysql2 from 'mysql2';
 
 import session from 'express-session';
 
-import { validateGameForm } from './validation.js';
+import { validateformData } from './validation.js';
+
+import { registerFormValidation } from './validation.js';
 
 
 //dotenv config
@@ -107,16 +109,26 @@ app.get('/home', requireLogin, (req, res) => {
 
 // Registration page
 app.get('/register', (req, res) => {
-  res.render('register_form');
+  // Render register page with empty errors/formData so no errors show by default
+  res.render('register_form', {
+    errors: [],
+    formData: {}
+  });
 });
 
 // Handle registration
 app.post('/register', async (req, res) => {
- const { firstName, lastName, username, email, password } = req.body;
 
-    if (!firstName || !lastName || !username || !email || !password) {
-    return res.render('account_err', {
-      message: 'All fields are required.',
+const registerForm = req.body;
+
+const errors = registerFormValidation(registerForm);
+
+
+  // if errors exist, show the same form again
+    if (errors.length > 0) {
+    return res.render('register_form', {
+      errors,
+      formData: registerForm
     });
   }
 
@@ -157,7 +169,7 @@ app.post('/add-game', requireLogin, async (req, res) => {
   const gameForm = req.body;
 
   // run server-side validation
-  const errors = validateGameForm(gameForm);
+  const errors = validateformData(gameForm);
 
   // if errors exist, show the same form again
   if (errors.length > 0) {
