@@ -21,6 +21,16 @@
     <%- include('navbar') %>
   <section class="form">
     <h2>Register</h2>
+
+        <!-- server-side validation errors -->
+    <% if (errors && errors.length > 0) { %>
+        <div class="server-errors">          
+            <% errors.forEach(error => { %>
+                <p><%= error %></p>
+            <% }) %>     
+        </div>
+    <% } %>
+    
     <form id="registerForm" action="/register" method="post">
       <!--Personal Information-->
       <fieldset>
