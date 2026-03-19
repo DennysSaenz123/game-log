@@ -136,7 +136,8 @@ const errors = registerFormValidation(registerForm);
     const sql =
       'INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)';
 
-    const params = [firstName, lastName, username, email, password];
+    const { firstName, lastName, username, email, password } = registerForm;
+    const params = [firstName.trim(), lastName.trim(), username.trim(), email.trim(), password];
 
     const [result] = await pool.execute(sql, params);
     console.log('User registered:', result);
